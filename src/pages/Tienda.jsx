@@ -11,219 +11,213 @@ import CartNotification from "../components/cart/CartNotification";
 const products = [
   {
     id: 1,
-    name: "Router Wi-Fi 6 Mesh",
-    category: "Redes",
-    price: "$299.990",
-    image: "https://images.unsplash.com/photo-1606904825846-647eb07f5be2?w=600&h=400&fit=crop",
+    name: "Smart Watch Pro 2",
+    category: "Wearables",
+    price: "$300.000",
+    image: "/images/tienda/watchpro2/1.jpg",
+    images: [
+      "/images/tienda/watchpro2/1.jpg",
+      "/images/tienda/watchpro2/2.png",
+      "/images/tienda/watchpro2/3.png",
+      "/images/tienda/watchpro2/4.png",
+      "/images/tienda/watchpro2/5.png",
+    ],
+    video: "/images/tienda/watchpro2/6.mp4",
   },
   {
     id: 2,
-    name: "Switch Gigabit 24 Puertos",
-    category: "Redes",
-    price: "$189.990",
-    image: "https://images.unsplash.com/photo-1629654291663-b91ad427698f?w=600&h=800&fit=crop",
-  },
-  {
-    id: 3,
-    name: "Cámara IP 4K PTZ",
-    category: "Seguridad",
-    price: "$459.990",
-    image: "https://images.unsplash.com/photo-1557597774-9d273605dfa9?w=600&h=900&fit=crop",
-  },
-  {
-    id: 4,
-    name: "Access Point Enterprise",
-    category: "Redes",
-    price: "$349.990",
-    image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=600&h=450&fit=crop",
-  },
-  {
-    id: 5,
-    name: "Cable UTP Cat 6A - 305m",
-    category: "Cableado",
-    price: "$129.990",
-    image: "https://images.unsplash.com/photo-1598520106830-8c45c2035460?w=600&h=350&fit=crop",
-  },
-  {
-    id: 6,
-    name: "Rack 19\" 42U",
-    category: "Infraestructura",
-    price: "$899.990",
-    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&h=750&fit=crop",
-  },
-  {
-    id: 7,
-    name: "UPS Online 3kVA",
-    category: "Energía",
-    price: "$1.299.990",
-    image: "https://images.unsplash.com/photo-1591489378430-7a5cba5f4167?w=600&h=500&fit=crop",
-  },
-  {
-    id: 8,
-    name: "Patch Panel 48 Puertos",
-    category: "Cableado",
-    price: "$79.990",
-    image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=600&h=400&fit=crop",
-  },
-  {
-    id: 9,
-    name: "Firewall Next-Gen",
-    category: "Seguridad",
-    price: "$2.499.990",
-    image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&h=850&fit=crop",
-  },
-  {
-    id: 10,
-    name: "Fibra Óptica Monomodo",
-    category: "Cableado",
-    price: "$199.990",
-    image: "https://images.unsplash.com/photo-1586724237569-f3d0c1dee8c6?w=600&h=380&fit=crop",
-  },
-  {
-    id: 11,
-    name: "Antena Direccional 5GHz",
-    category: "Redes",
-    price: "$149.990",
-    image: "https://images.unsplash.com/photo-1516044734145-07ca8eef8731?w=600&h=700&fit=crop",
-  },
-  {
-    id: 12,
-    name: "Kit Herramientas Networking",
-    category: "Herramientas",
-    price: "$89.990",
-    image: "https://images.unsplash.com/photo-1530124566582-a618bc2615dc?w=600&h=600&fit=crop",
-  },
-  {
-    id: 13,
-    name: "Servidor NAS 4 Bahías",
-    category: "Almacenamiento",
-    price: "$549.990",
-    image: "https://images.unsplash.com/photo-1597852074816-d933c7d2b988?w=600&h=800&fit=crop",
-  },
-  {
-    id: 14,
-    name: "PoE Injector Gigabit",
-    category: "Redes",
-    price: "$39.990",
-    image: "https://images.unsplash.com/photo-1629654291663-b91ad427698f?w=600&h=400&fit=crop",
-  },
-  {
-    id: 15,
-    name: "KVM Switch 8 Puertos",
-    category: "Infraestructura",
-    price: "$279.990",
-    image: "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=600&h=450&fit=crop",
-  },
-  {
-    id: 16,
-    name: "Cámara Domo Exterior",
-    category: "Seguridad",
-    price: "$189.990",
-    image: "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=600&h=500&fit=crop",
-  },
-  {
-    id: 17,
-    name: "Switch PoE 8 Puertos",
-    category: "Redes",
-    price: "$129.990",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=350&fit=crop",
-  },
-  {
-    id: 18,
-    name: "Multímetro Digital Pro",
-    category: "Herramientas",
-    price: "$79.990",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=750&fit=crop",
-  },
-  {
-    id: 19,
-    name: "Disco SSD 1TB Enterprise",
-    category: "Almacenamiento",
-    price: "$249.990",
-    image: "https://images.unsplash.com/photo-1597138804456-e7dca7f59d54?w=600&h=400&fit=crop",
-  },
-  {
-    id: 20,
-    name: "Cable HDMI 4K 15m",
-    category: "Cableado",
-    price: "$49.990",
-    image: "https://images.unsplash.com/photo-1605648916361-9bc12ad6a569?w=600&h=300&fit=crop",
-  },
-  {
-    id: 21,
-    name: "Regulador de Voltaje 2kVA",
-    category: "Energía",
-    price: "$189.990",
-    image: "https://images.unsplash.com/photo-1609752441539-25e51f84f88d?w=600&h=650&fit=crop",
-  },
-  {
-    id: 22,
-    name: "Panel Solar 400W",
-    category: "Energía",
-    price: "$599.990",
-    image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=600&h=450&fit=crop",
-  },
-  {
-    id: 23,
-    name: "Gabinete de Pared 9U",
-    category: "Infraestructura",
-    price: "$299.990",
-    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&h=800&fit=crop",
-  },
-  {
-    id: 24,
-    name: "Transceiver SFP+ 10G",
-    category: "Redes",
-    price: "$89.990",
-    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=380&fit=crop",
-  },
-  {
-    id: 25,
-    name: "DVR 16 Canales 4K",
-    category: "Seguridad",
-    price: "$649.990",
-    image: "https://images.unsplash.com/photo-1562408590-e32931084e23?w=600&h=420&fit=crop",
-  },
-  {
-    id: 26,
-    name: "Fusionadora de Fibra",
-    category: "Herramientas",
-    price: "$4.999.990",
-    image: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=600&h=700&fit=crop",
-  },
-  {
-    id: 27,
-    name: "Disco Duro 8TB NAS",
-    category: "Almacenamiento",
-    price: "$349.990",
-    image: "https://images.unsplash.com/photo-1531492746076-161ca9bcad58?w=600&h=500&fit=crop",
-  },
-  {
-    id: 28,
-    name: "Router Mikrotik CCR",
-    category: "Redes",
-    price: "$1.899.990",
-    image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=600&h=350&fit=crop",
-  },
-  {
-    id: 29,
-    name: "Batería UPS 12V 9Ah",
-    category: "Energía",
-    price: "$59.990",
-    image: "https://images.unsplash.com/photo-1619641805634-98e5c833a51f?w=600&h=400&fit=crop",
-  },
-  {
-    id: 30,
-    name: "Cámara Bullet 8MP",
-    category: "Seguridad",
-    price: "$299.990",
-    image: "https://images.unsplash.com/photo-1555086156-e6c7353d283f?w=600&h=550&fit=crop",
+    name: "Lenovo thinkplus XT88",
+    category: "Audio",
+    price: "$50.000",
+    image: "/images/tienda/xt88/1.png",
+    images: [
+      "/images/tienda/xt88/1.png",
+      "/images/tienda/xt88/2.png",
+      "/images/tienda/xt88/3.png",
+      "/images/tienda/xt88/4.png",
+    ],
   },
 ];
 
-function ProductCard({ product, onAddToCart }) {
+// Componente Modal con Carrusel
+function ProductModal({ product, onClose, onAddToCart }) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const modalRef = useRef(null);
+
+  // Total de items: imágenes + video (si existe)
+  const totalItems = product.images ? product.images.length + (product.video ? 1 : 0) : 1;
+  const isVideo = product.video && currentIndex === product.images?.length;
+
+  // Cerrar con Escape
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") onClose();
+      if (e.key === "ArrowLeft") goToPrev();
+      if (e.key === "ArrowRight") goToNext();
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [currentIndex]);
+
+  // Animación de entrada
+  useLayoutEffect(() => {
+    gsap.fromTo(modalRef.current,
+      { opacity: 0, scale: 0.9 },
+      { opacity: 1, scale: 1, duration: 0.3, ease: "power2.out" }
+    );
+  }, []);
+
+  const goToPrev = () => {
+    setCurrentIndex((prev) => (prev === 0 ? totalItems - 1 : prev - 1));
+  };
+
+  const goToNext = () => {
+    setCurrentIndex((prev) => (prev === totalItems - 1 ? 0 : prev + 1));
+  };
+
+  const handleBackdropClick = (e) => {
+    if (e.target === e.currentTarget) onClose();
+  };
+
   return (
-    <div className="masonry-item group">
+    <div
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+      onClick={handleBackdropClick}
+    >
+      <div ref={modalRef} className="relative w-full max-w-4xl bg-white rounded-lg overflow-hidden shadow-2xl">
+        {/* Botón cerrar */}
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center bg-black/50 hover:bg-black/70 text-white rounded-full transition-colors"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+          </svg>
+        </button>
+
+        {/* Carrusel */}
+        <div className="relative aspect-video bg-[#0A2342] flex items-center justify-center">
+          {isVideo ? (
+            <video
+              src={product.video}
+              controls
+              autoPlay
+              className="w-full h-full object-contain"
+            />
+          ) : (
+            <img
+              src={product.images?.[currentIndex] || product.image}
+              alt={`${product.name} - ${currentIndex + 1}`}
+              className="w-full h-full object-contain"
+            />
+          )}
+
+          {/* Flechas de navegación */}
+          {totalItems > 1 && (
+            <>
+              <button
+                onClick={goToPrev}
+                className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center bg-white/90 hover:bg-white text-[#0A2342] rounded-full shadow-lg transition-all hover:scale-110"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="m15 18-6-6 6-6"/>
+                </svg>
+              </button>
+              <button
+                onClick={goToNext}
+                className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center bg-white/90 hover:bg-white text-[#0A2342] rounded-full shadow-lg transition-all hover:scale-110"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="m9 18 6-6-6-6"/>
+                </svg>
+              </button>
+            </>
+          )}
+
+          {/* Indicador de video */}
+          {isVideo && (
+            <div className="absolute top-4 left-4 bg-[#DC3545] text-white px-3 py-1 rounded-full text-sm font-semibold flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="5 3 19 12 5 21 5 3"/>
+              </svg>
+              Video
+            </div>
+          )}
+        </div>
+
+        {/* Miniaturas */}
+        {totalItems > 1 && (
+          <div className="flex gap-2 p-4 bg-[#E8EEF2] overflow-x-auto">
+            {product.images?.map((img, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentIndex(index)}
+                className={`flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-all ${
+                  currentIndex === index ? 'border-[#DC3545] scale-105' : 'border-transparent opacity-70 hover:opacity-100'
+                }`}
+              >
+                <img src={img} alt={`Miniatura ${index + 1}`} className="w-full h-full object-cover" />
+              </button>
+            ))}
+            {product.video && (
+              <button
+                onClick={() => setCurrentIndex(product.images?.length || 0)}
+                className={`flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-all bg-[#0A2342] flex items-center justify-center ${
+                  isVideo ? 'border-[#DC3545] scale-105' : 'border-transparent opacity-70 hover:opacity-100'
+                }`}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white">
+                  <polygon points="5 3 19 12 5 21 5 3"/>
+                </svg>
+              </button>
+            )}
+          </div>
+        )}
+
+        {/* Info del producto */}
+        <div className="p-6">
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <span className="text-sm text-[#4A90E2] font-semibold">{product.category}</span>
+              <h2 className="text-2xl font-bold text-[#0A2342] mt-1">{product.name}</h2>
+            </div>
+            <span className="text-2xl font-bold text-[#DC3545]">{product.price}</span>
+          </div>
+          <button
+            onClick={() => {
+              onAddToCart(product);
+              onClose();
+            }}
+            className="mt-6 w-full px-6 py-3 bg-[#DC3545] hover:bg-[#A02128] text-white font-semibold rounded-lg transition-colors flex items-center justify-center gap-2"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/>
+              <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/>
+            </svg>
+            Agregar al carrito
+          </button>
+        </div>
+
+        {/* Indicadores de posición */}
+        <div className="absolute bottom-[180px] left-1/2 -translate-x-1/2 flex gap-2">
+          {Array.from({ length: totalItems }).map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentIndex(index)}
+              className={`w-2 h-2 rounded-full transition-all ${
+                currentIndex === index ? 'bg-white w-6' : 'bg-white/50'
+              }`}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ProductCard({ product, onAddToCart, onOpenModal }) {
+  return (
+    <div className="masonry-item group cursor-pointer" onClick={() => onOpenModal(product)}>
       <img
         src={product.image}
         alt={product.name}
@@ -231,20 +225,39 @@ function ProductCard({ product, onAddToCart }) {
         loading="lazy"
       />
       <span className="masonry-badge">{product.category}</span>
+
       <div className="masonry-overlay">
         <span className="masonry-category">{product.category}</span>
         <h3 className="masonry-title">{product.name}</h3>
         <span className="masonry-price">{product.price}</span>
-        <button
-          onClick={() => onAddToCart(product)}
-          className="mt-3 px-4 py-2 bg-[#DC3545] hover:bg-[#A02128] text-white text-sm font-semibold rounded transition-colors flex items-center gap-2"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/>
-            <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/>
-          </svg>
-          Agregar
-        </button>
+        <div className="flex gap-2 mt-3">
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              onOpenModal(product);
+            }}
+            className="px-4 py-2 bg-white/20 hover:bg-white/30 text-white text-sm font-semibold rounded transition-colors flex items-center gap-2 backdrop-blur-sm"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+            Ver
+          </button>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              onAddToCart(product);
+            }}
+            className="px-4 py-2 bg-[#DC3545] hover:bg-[#A02128] text-white text-sm font-semibold rounded transition-colors flex items-center gap-2"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/>
+              <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/>
+            </svg>
+            Agregar
+          </button>
+        </div>
       </div>
     </div>
   );
@@ -253,6 +266,7 @@ function ProductCard({ product, onAddToCart }) {
 export default function Tienda() {
   const [selectedCategory, setSelectedCategory] = useState("Todos");
   const [showCursor, setShowCursor] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
   const gridRef = useRef(null);
   const hasAnimated = useRef(false);
   const { addToCart } = useCart();
@@ -262,7 +276,19 @@ export default function Tienda() {
     setShowCursor(true);
   }, []);
 
-  const categories = ["Todos", "Redes", "Seguridad", "Cableado", "Infraestructura", "Energía", "Almacenamiento", "Herramientas"];
+  // Bloquear scroll cuando el modal está abierto
+  useEffect(() => {
+    if (selectedProduct) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [selectedProduct]);
+
+  const categories = ["Todos", "Wearables", "Audio"];
 
   const filteredProducts = selectedCategory === "Todos"
     ? products
@@ -358,6 +384,7 @@ export default function Tienda() {
                   key={product.id}
                   product={product}
                   onAddToCart={addToCart}
+                  onOpenModal={setSelectedProduct}
                 />
               ))}
             </div>
@@ -384,6 +411,15 @@ export default function Tienda() {
           </div>
         </footer>
       </div>
+
+      {/* Modal de producto con carrusel */}
+      {selectedProduct && (
+        <ProductModal
+          product={selectedProduct}
+          onClose={() => setSelectedProduct(null)}
+          onAddToCart={addToCart}
+        />
+      )}
 
       {/* Carrito */}
       <Cart />
