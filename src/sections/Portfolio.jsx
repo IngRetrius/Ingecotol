@@ -82,7 +82,7 @@ export default function Portfolio() {
   }
 
   return (
-    <section id="portfolio-section" className="min-h-screen px-5 py-16 md:px-10 lg:px-14 flex flex-col justify-center bg-[#E8EEF2]">
+    <section id="portfolio-section" className="min-h-screen px-5 py-16 md:px-10 lg:px-14 flex flex-col justify-center bg-white">
       {/* Título principal */}
       <h2 id="portfolio-title" className="text-7xl md:text-9xl font-family-oswald line-through mb-8 text-[#0A2342] text-center">
         Ingecotol FC

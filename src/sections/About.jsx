@@ -31,7 +31,7 @@ export default function About() {
   }, [])
 
   return (
-    <section id="about-section" className="relative min-h-dvh flex flex-col justify-center py-24 px-5 lg:px-20 overflow-hidden select-none bg-[#E8EEF2]" aria-labelledby="about-heading">
+    <section id="about-section" className="relative min-h-dvh flex flex-col justify-center py-24 px-5 lg:px-20 overflow-hidden select-none bg-white" aria-labelledby="about-heading">
       <h2 id="about-heading" className="sr-only">Sobre Ingecotol - Nuestras cifras y trayectoria</h2>
       {/* Cifras impactantes */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-7xl mx-auto mb-20" role="list" aria-label="Estadísticas de la empresa">

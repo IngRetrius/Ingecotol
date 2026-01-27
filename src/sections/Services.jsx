@@ -49,7 +49,7 @@ export default function Services() {
   }, [])
 
   return (
-    <section id="services-section" className="min-h-96 px-5 md:px-0 md:pl-5 overflow-hidden mb-0 mt-10 flex flex-col font-family-lato" aria-labelledby="services-heading">
+    <section id="services-section" className="min-h-96 px-5 md:px-0 md:pl-5 overflow-hidden mb-0 py-20 flex flex-col font-family-lato bg-[#E8EEF2]" aria-labelledby="services-heading">
       <div className="relative flex-2 flex flex-col lg:flex-row gap-8">
         <div id="services-text" className="md:ml-10 flex-2 font-family-lato flex justify-center flex-col">
           <h2 id="services-heading" className="text-7xl md:text-9xl font-family-oswald line-through text-[#0A2342]">Servicios</h2>
@@ -114,12 +114,12 @@ export default function Services() {
             </div>
           </div>
         </div>
-        <div id="container-bars" className="relative flex justify-center -z-10 flex-1 pointer-events-none overflow-hidden">
-          <span className="hidden lg:block absolute bottom-0 right-0 top-0 h-10 w-lg bg-[#2f5597]"></span>
-          <span className="hidden lg:block absolute transform top-4/11 right-0 h-27 w-md bg-[#2f5597]"></span>
-          <span className="hidden lg:block absolute bottom-0 right-0 h-6 w-lg bg-[#2f5597]"></span>
-          <div className="relative lg:absolute bottom-0 right-0 object-cover">
-            <img src="../../images/face-services.png" className="grayscale mask-b-from-60%" />
+        <div id="container-bars" className="hidden lg:flex relative justify-center flex-1 pointer-events-none overflow-hidden min-h-[400px]">
+          <span className="absolute bottom-0 right-0 top-0 h-10 w-lg bg-[#2f5597]"></span>
+          <span className="absolute transform top-4/11 right-0 h-27 w-md bg-[#2f5597]"></span>
+          <span className="absolute bottom-0 right-0 h-6 w-lg bg-[#2f5597]"></span>
+          <div className="absolute bottom-0 right-0">
+            <img src="/images/part-1-about.png" alt="Servicios Ingecotol" className="max-h-[500px] w-auto object-contain" />
           </div>
         </div>
       </div>

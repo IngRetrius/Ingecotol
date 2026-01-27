@@ -3,6 +3,7 @@ import BallCursor from "../common/BallCursor";
 import SEO from "../common/SEO";
 import { useRef } from "react";
 import Home from "../../sections/Home";
+import ProductShowcase from "../../sections/ProductShowcase";
 import About from "../../sections/About";
 import Services from "../../sections/Services";
 import Contact from "../../sections/Contact";
@@ -44,6 +45,7 @@ export default function Layout() {
 
         <main id="main-content" className="flex-grow pt-16 md:pt-20" role="main">
           <Home />
+          <ProductShowcase />
           <About />
           <Services />
           <Portfolio />
