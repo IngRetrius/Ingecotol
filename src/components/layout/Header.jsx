@@ -53,7 +53,7 @@ export default function Header() {
           <img
             src="/images/Logo ingecotol.png"
             alt="Logo Ingecotol"
-            className="h-50 md:h-45 w-auto object-contain ml-2"
+            className="h-15 md:h-18 w-auto object-contain ml-2"
           />
         </a>
 

@@ -1,6 +1,7 @@
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import { useState, useEffect, useRef } from "react"
+import { Link } from "react-router"
 
 export default function Portfolio() {
   const [currentSlide, setCurrentSlide] = useState(0)
@@ -175,6 +176,16 @@ export default function Portfolio() {
           <p className="text-lg text-[#4A5568] mt-6">
             Válido en toda la tienda Ingecotol
           </p>
+          <Link
+            to="/tienda"
+            className="mt-6 inline-flex items-center justify-center gap-2 px-8 py-3 bg-[#DC3545] hover:bg-[#A02128] text-white font-semibold rounded-lg transition-colors text-lg"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/>
+              <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/>
+            </svg>
+            Ir a la Tienda
+          </Link>
         </div>
       </div>
     </section>

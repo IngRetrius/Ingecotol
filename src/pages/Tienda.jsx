@@ -337,7 +337,7 @@ export default function Tienda() {
       <div className="min-h-screen bg-white">
         {/* Header fijo con branding */}
         <header className="sticky top-0 z-50 bg-[#0A2342] text-white shadow-lg">
-          <div className="container mx-auto px-5 py-2 flex items-center justify-between">
+          <div className="container mx-auto px-5 flex items-center justify-between">
             <Link to="/app" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="m12 19-7-7 7-7"/>
@@ -348,7 +348,7 @@ export default function Tienda() {
             <img
               src="/images/Logo ingecotol.png"
               alt="Ingecotol"
-              className="h-10 md:h-12 w-auto object-contain"
+              className="h-14 md:h-35 w-auto object-contain"
             />
             <CartIcon />
           </div>
