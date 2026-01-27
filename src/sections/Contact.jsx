@@ -6,15 +6,16 @@ export default function Contact() {
   ]
 
   return (
-    <footer id="contact-section" className="bg-[#0A2342] text-white">
+    <footer id="contact-section" className="bg-[#0A2342] text-white" role="contentinfo">
       <div className="max-w-6xl mx-auto px-5 py-10">
+        <h2 className="sr-only">Información de contacto de Ingecotol Ltda</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
 
           {/* Logo y descripción */}
           <div className="flex flex-col items-center">
             <img
               src="/images/Logo blanco.png"
-              alt="Ingecotol"
+              alt="Ingecotol Ltda - Logo de la empresa"
               className="h-28 md:h-32 w-auto mb-4"
             />
             <p className="text-white/60 text-sm text-center">
@@ -23,8 +24,8 @@ export default function Contact() {
           </div>
 
           {/* WhatsApp */}
-          <div>
-            <h4 className="font-family-oswald text-lg mb-4 text-white/90">WhatsApp</h4>
+          <nav aria-label="Contacto por WhatsApp">
+            <h3 className="font-family-oswald text-lg mb-4 text-white/90">WhatsApp</h3>
             <ul className="space-y-2">
               {whatsappContacts.map((contact, index) => (
                 <li key={index}>
@@ -44,11 +45,11 @@ export default function Contact() {
                 </li>
               ))}
             </ul>
-          </div>
+          </nav>
 
           {/* Correo y horario */}
           <div>
-            <h4 className="font-family-oswald text-lg mb-4 text-white/90">Contacto</h4>
+            <h3 className="font-family-oswald text-lg mb-4 text-white/90">Contacto</h3>
             <ul className="space-y-2">
               <li>
                 <a

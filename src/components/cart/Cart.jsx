@@ -1,4 +1,6 @@
+import { useRef, useLayoutEffect, useCallback, useEffect } from 'react';
 import { useCart } from '../../context/CartContext';
+import gsap from 'gsap';
 
 export default function Cart() {
   const {
@@ -11,28 +13,142 @@ export default function Cart() {
     checkoutWhatsApp
   } = useCart();
 
+  const overlayRef = useRef(null);
+  const sidebarRef = useRef(null);
+  const itemsRef = useRef([]);
+
+  // Limpiar referencias cuando cambian los items
+  useEffect(() => {
+    itemsRef.current = itemsRef.current.slice(0, cart.items.length);
+  }, [cart.items.length]);
+
+  // Animación de entrada
+  useLayoutEffect(() => {
+    if (!isCartOpen || !overlayRef.current || !sidebarRef.current) return;
+
+    // Filtrar referencias válidas
+    const validItems = itemsRef.current.filter(el => el !== null && el !== undefined);
+
+    const ctx = gsap.context(() => {
+      // Timeline de entrada
+      const tl = gsap.timeline();
+
+      // Fade in del overlay
+      tl.fromTo(overlayRef.current,
+        { opacity: 0 },
+        { opacity: 1, duration: 0.3, ease: "power2.out" }
+      );
+
+      // Slide in del sidebar desde la derecha
+      tl.fromTo(sidebarRef.current,
+        { x: "100%", opacity: 0 },
+        { x: "0%", opacity: 1, duration: 0.4, ease: "power3.out" },
+        "-=0.2"
+      );
+
+      // Animar items del carrito uno por uno
+      if (validItems.length > 0) {
+        tl.fromTo(validItems,
+          { x: 30, opacity: 0 },
+          {
+            x: 0,
+            opacity: 1,
+            duration: 0.3,
+            stagger: 0.08,
+            ease: "power2.out"
+          },
+          "-=0.2"
+        );
+      }
+    });
+
+    return () => ctx.revert();
+  }, [isCartOpen]);
+
+  // Animación de cierre
+  const handleClose = useCallback(() => {
+    if (!sidebarRef.current || !overlayRef.current) {
+      setIsCartOpen(false);
+      return;
+    }
+
+    const tl = gsap.timeline({
+      onComplete: () => setIsCartOpen(false)
+    });
+
+    // Slide out del sidebar
+    tl.to(sidebarRef.current, {
+      x: "100%",
+      duration: 0.3,
+      ease: "power3.in"
+    });
+
+    // Fade out del overlay
+    tl.to(overlayRef.current, {
+      opacity: 0,
+      duration: 0.2,
+      ease: "power2.in"
+    }, "-=0.15");
+  }, [setIsCartOpen]);
+
+  // Animación al eliminar item
+  const handleRemoveItem = useCallback((itemId, index) => {
+    const itemEl = itemsRef.current[index];
+    if (itemEl && document.body.contains(itemEl)) {
+      gsap.to(itemEl, {
+        x: 100,
+        opacity: 0,
+        duration: 0.3,
+        ease: "power2.in",
+        onComplete: () => {
+          removeFromCart(itemId);
+        }
+      });
+    } else {
+      removeFromCart(itemId);
+    }
+  }, [removeFromCart]);
+
+  // Manejar decremento de cantidad (con animación si llega a 0)
+  const handleDecrement = useCallback((item, index) => {
+    if (item.quantity <= 1) {
+      handleRemoveItem(item.id, index);
+    } else {
+      updateQuantity(item.id, item.quantity - 1);
+    }
+  }, [handleRemoveItem, updateQuantity]);
+
   if (!isCartOpen) return null;
 
   return (
     <>
       {/* Overlay */}
       <div
-        className="fixed inset-0 bg-black/50 z-[100]"
-        onClick={() => setIsCartOpen(false)}
+        ref={overlayRef}
+        className="fixed inset-0 bg-black/50 z-[100] backdrop-blur-sm"
+        onClick={handleClose}
+        aria-hidden="true"
       />
 
       {/* Cart Sidebar */}
-      <div className="fixed top-0 right-0 h-full w-full max-w-md bg-[#0A2342] z-[101] shadow-2xl flex flex-col">
+      <div
+        ref={sidebarRef}
+        className="fixed top-0 right-0 h-full w-full max-w-md bg-[#0A2342] z-[101] shadow-2xl flex flex-col"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="cart-title"
+      >
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b border-white/10">
-          <h2 className="font-family-oswald text-xl text-white">
+          <h2 id="cart-title" className="font-family-oswald text-xl text-white">
             Carrito ({getItemCount()})
           </h2>
           <button
-            onClick={() => setIsCartOpen(false)}
-            className="text-white/60 hover:text-white p-2"
+            onClick={handleClose}
+            className="text-white/60 hover:text-white p-2 transition-colors"
+            aria-label="Cerrar carrito"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
             </svg>
           </button>
@@ -50,8 +166,12 @@ export default function Cart() {
             </div>
           ) : (
             <div className="space-y-4">
-              {cart.items.map((item) => (
-                <div key={item.id} className="flex gap-3 bg-white/5 rounded-lg p-3">
+              {cart.items.map((item, index) => (
+                <div
+                  key={item.id}
+                  ref={el => itemsRef.current[index] = el}
+                  className="flex gap-3 bg-white/5 rounded-lg p-3 transition-colors hover:bg-white/10"
+                >
                   <img
                     src={item.image}
                     alt={item.name}
@@ -65,25 +185,39 @@ export default function Cart() {
                     {/* Controles de cantidad */}
                     <div className="flex items-center gap-2 mt-2">
                       <button
-                        onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                        className="w-6 h-6 flex items-center justify-center bg-white/10 text-white rounded hover:bg-white/20"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleDecrement(item, index);
+                        }}
+                        className="w-6 h-6 flex items-center justify-center bg-white/10 text-white rounded hover:bg-white/20 transition-colors"
+                        aria-label="Reducir cantidad"
                       >
                         -
                       </button>
-                      <span className="text-white text-sm w-6 text-center">{item.quantity}</span>
+                      <span className="text-white text-sm w-6 text-center" aria-label={`Cantidad: ${item.quantity}`}>
+                        {item.quantity}
+                      </span>
                       <button
-                        onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                        className="w-6 h-6 flex items-center justify-center bg-white/10 text-white rounded hover:bg-white/20"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          updateQuantity(item.id, item.quantity + 1);
+                        }}
+                        className="w-6 h-6 flex items-center justify-center bg-white/10 text-white rounded hover:bg-white/20 transition-colors"
+                        aria-label="Aumentar cantidad"
                       >
                         +
                       </button>
                     </div>
                   </div>
                   <button
-                    onClick={() => removeFromCart(item.id)}
-                    className="text-white/40 hover:text-[#DC3545] p-1"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleRemoveItem(item.id, index);
+                    }}
+                    className="text-white/40 hover:text-[#DC3545] p-1 transition-colors"
+                    aria-label={`Eliminar ${item.name} del carrito`}
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                       <path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
                     </svg>
                   </button>

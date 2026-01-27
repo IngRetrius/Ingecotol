@@ -31,47 +31,48 @@ export default function About() {
   }, [])
 
   return (
-    <section id="about-section" className="relative min-h-dvh flex flex-col justify-center py-24 px-5 lg:px-20 overflow-hidden select-none bg-[#E8EEF2]">
+    <section id="about-section" className="relative min-h-dvh flex flex-col justify-center py-24 px-5 lg:px-20 overflow-hidden select-none bg-[#E8EEF2]" aria-labelledby="about-heading">
+      <h2 id="about-heading" className="sr-only">Sobre Ingecotol - Nuestras cifras y trayectoria</h2>
       {/* Cifras impactantes */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-7xl mx-auto mb-20">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-7xl mx-auto mb-20" role="list" aria-label="Estadísticas de la empresa">
         {/* Instituciones educativas */}
-        <div className="stat-item text-center p-6 md:p-10">
-          <div className="font-family-oswald text-[8rem] md:text-[12rem] lg:text-[14rem] font-bold text-[#DC3545] leading-none tracking-tight">
+        <article className="stat-item text-center p-6 md:p-10" role="listitem">
+          <div className="font-family-oswald text-[8rem] md:text-[12rem] lg:text-[14rem] font-bold text-[#DC3545] leading-none tracking-tight" aria-hidden="true">
             +20
           </div>
-          <div className="text-xl md:text-2xl lg:text-3xl font-bold text-[#0A2342] mt-2">
+          <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-[#0A2342] mt-2">
             Instituciones Educativas
-          </div>
+          </h3>
           <p className="mt-2 text-base md:text-lg text-[#4A5568]">
-            en la ciudad respaldan nuestro trabajo
+            <span className="sr-only">Más de 20</span> en la ciudad respaldan nuestro trabajo
           </p>
-        </div>
+        </article>
 
         {/* Años de experiencia */}
-        <div className="stat-item text-center p-6 md:p-10">
-          <div className="font-family-oswald text-[8rem] md:text-[12rem] lg:text-[14rem] font-bold text-[#2f5597] leading-none tracking-tight">
+        <article className="stat-item text-center p-6 md:p-10" role="listitem">
+          <div className="font-family-oswald text-[8rem] md:text-[12rem] lg:text-[14rem] font-bold text-[#2f5597] leading-none tracking-tight" aria-hidden="true">
             15
           </div>
-          <div className="text-xl md:text-2xl lg:text-3xl font-bold text-[#0A2342] mt-2">
+          <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-[#0A2342] mt-2">
             Años de Experiencia
-          </div>
+          </h3>
           <p className="mt-2 text-base md:text-lg text-[#4A5568]">
-            brindando soluciones tecnológicas
+            <span className="sr-only">15 años</span> brindando soluciones tecnológicas
           </p>
-        </div>
+        </article>
 
         {/* Clientes satisfechos */}
-        <div className="stat-item text-center p-6 md:p-10">
-          <div className="font-family-oswald text-[8rem] md:text-[12rem] lg:text-[14rem] font-bold text-[#DC3545] leading-none tracking-tight">
+        <article className="stat-item text-center p-6 md:p-10" role="listitem">
+          <div className="font-family-oswald text-[8rem] md:text-[12rem] lg:text-[14rem] font-bold text-[#DC3545] leading-none tracking-tight" aria-hidden="true">
             +300
           </div>
-          <div className="text-xl md:text-2xl lg:text-3xl font-bold text-[#0A2342] mt-2">
+          <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-[#0A2342] mt-2">
             Clientes Satisfechos
-          </div>
+          </h3>
           <p className="mt-2 text-base md:text-lg text-[#4A5568]">
-            confían en nuestros servicios
+            <span className="sr-only">Más de 300 clientes</span> confían en nuestros servicios
           </p>
-        </div>
+        </article>
       </div>
 
       {/* Descripción */}

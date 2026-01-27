@@ -4,6 +4,7 @@ import { SplitText } from "gsap/SplitText"
 import { useRef, useState } from "react"
 import BallCursor from "../components/common/BallCursor"
 import InkButton from "../components/common/InkButton"
+import SEO from "../components/common/SEO"
 import { useFontLoading } from "../hooks/useFontLoading"
 import { Link } from "react-router"
 
@@ -97,11 +98,19 @@ function Intro() {
   }, [fontsLoaded])
 
   return (
-    <section className="grid place-items-center min-h-screen">
+    <>
+      <SEO
+        title="Ingecotol Ltda | Ingeniería Civil y Telecomunicaciones en Colombia"
+        description="Bienvenido a Ingecotol Ltda. Empresa líder en ingeniería civil y telecomunicaciones en Colombia. Experiencia, calidad y variedad a su servicio."
+        keywords="Ingecotol, ingeniería civil, telecomunicaciones, Colombia, empresa tecnología"
+        canonical="https://ingecotol.com/"
+      />
+      <section className="grid place-items-center min-h-screen" role="banner">
       <div className="relative flex flex-col items-center gap-8 max-w-md md:max-w-xl px-5">
         <div ref={containerTitleRef} className="flex flex-row items-end relative gap-2 md:gap-3">
-          <h1 id="intro-title" className="font-family-oswald text-6xl md:text-8xl select-none whitespace-nowrap text-[#0A2342]">Ingecotol</h1>
-          <h1 id="intro-title-studio" className="font-family-oswald text-6xl md:text-8xl select-none text-[#2f5597]">ltda</h1>
+          <h1 className="sr-only">Ingecotol Ltda - Ingeniería Civil y Telecomunicaciones</h1>
+          <span id="intro-title" aria-hidden="true" className="font-family-oswald text-6xl md:text-8xl select-none whitespace-nowrap text-[#0A2342]">Ingecotol</span>
+          <span id="intro-title-studio" aria-hidden="true" className="font-family-oswald text-6xl md:text-8xl select-none text-[#2f5597]">ltda</span>
         </div>
         <div id="chasing-cursor" className="absolute p-0 m-0 w-4 h-4 bg-transparent border-2 border-[#2f5597] rounded-full flex items-center justify-center select-none ml-2">
           <small className="m-0 p-5 leading-none text-[11px] font-bold text-[#2f5597]">R</small>
@@ -117,6 +126,7 @@ function Intro() {
       </div>
       {positionInitialCursor && <BallCursor ref={ballCursorRef} positionInitialCursor={positionInitialCursor} />}
     </section>
+    </>
   )
 }
 

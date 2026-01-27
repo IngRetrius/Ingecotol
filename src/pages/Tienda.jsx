@@ -2,6 +2,7 @@ import { useState, useRef, useLayoutEffect, useEffect } from "react";
 import { Link } from "react-router";
 import gsap from "gsap";
 import BallCursor from "../components/common/BallCursor";
+import SEO from "../components/common/SEO";
 import { useCart } from "../context/CartContext";
 import Cart from "../components/cart/Cart";
 import CartIcon from "../components/cart/CartIcon";
@@ -35,6 +36,20 @@ const products = [
       "/images/tienda/xt88/2.png",
       "/images/tienda/xt88/3.png",
       "/images/tienda/xt88/4.png",
+    ],
+  },
+  {
+    id: 3,
+    name: "Colmi P81",
+    category: "Wearables",
+    price: "$85.000",
+    image: "/images/tienda/colmip81/1.webp",
+    images: [
+      "/images/tienda/colmip81/1.webp",
+      "/images/tienda/colmip81/2.webp",
+      "/images/tienda/colmip81/3.png",
+      "/images/tienda/colmip81/4.webp",
+      "/images/tienda/colmip81/5.webp",
     ],
   },
 ];
@@ -83,31 +98,36 @@ function ProductModal({ product, onClose, onAddToCart }) {
     <div
       className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
       onClick={handleBackdropClick}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-product-title"
     >
       <div ref={modalRef} className="relative w-full max-w-4xl bg-white rounded-lg overflow-hidden shadow-2xl">
         {/* Botón cerrar */}
         <button
           onClick={onClose}
+          aria-label="Cerrar modal"
           className="absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center bg-black/50 hover:bg-black/70 text-white rounded-full transition-colors"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
           </svg>
         </button>
 
         {/* Carrusel */}
-        <div className="relative aspect-video bg-[#0A2342] flex items-center justify-center">
+        <div className="relative aspect-video bg-[#0A2342] flex items-center justify-center" role="region" aria-label="Galería de imágenes del producto">
           {isVideo ? (
             <video
               src={product.video}
               controls
               autoPlay
               className="w-full h-full object-contain"
+              aria-label={`Video de ${product.name}`}
             />
           ) : (
             <img
               src={product.images?.[currentIndex] || product.image}
-              alt={`${product.name} - ${currentIndex + 1}`}
+              alt={`${product.name} - Imagen ${currentIndex + 1} de ${totalItems}`}
               className="w-full h-full object-contain"
             />
           )}
@@ -117,17 +137,19 @@ function ProductModal({ product, onClose, onAddToCart }) {
             <>
               <button
                 onClick={goToPrev}
+                aria-label="Imagen anterior"
                 className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center bg-white/90 hover:bg-white text-[#0A2342] rounded-full shadow-lg transition-all hover:scale-110"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <path d="m15 18-6-6 6-6"/>
                 </svg>
               </button>
               <button
                 onClick={goToNext}
+                aria-label="Siguiente imagen"
                 className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center bg-white/90 hover:bg-white text-[#0A2342] rounded-full shadow-lg transition-all hover:scale-110"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <path d="m9 18 6-6-6-6"/>
                 </svg>
               </button>
@@ -179,18 +201,19 @@ function ProductModal({ product, onClose, onAddToCart }) {
           <div className="flex items-start justify-between gap-4">
             <div>
               <span className="text-sm text-[#4A90E2] font-semibold">{product.category}</span>
-              <h2 className="text-2xl font-bold text-[#0A2342] mt-1">{product.name}</h2>
+              <h2 id="modal-product-title" className="text-2xl font-bold text-[#0A2342] mt-1">{product.name}</h2>
             </div>
-            <span className="text-2xl font-bold text-[#DC3545]">{product.price}</span>
+            <span className="text-2xl font-bold text-[#DC3545]" aria-label={`Precio: ${product.price}`}>{product.price}</span>
           </div>
           <button
             onClick={() => {
               onAddToCart(product);
               onClose();
             }}
+            aria-label={`Agregar ${product.name} al carrito por ${product.price}`}
             className="mt-6 w-full px-6 py-3 bg-[#DC3545] hover:bg-[#A02128] text-white font-semibold rounded-lg transition-colors flex items-center justify-center gap-2"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/>
               <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/>
             </svg>
@@ -199,11 +222,14 @@ function ProductModal({ product, onClose, onAddToCart }) {
         </div>
 
         {/* Indicadores de posición */}
-        <div className="absolute bottom-[180px] left-1/2 -translate-x-1/2 flex gap-2">
+        <div className="absolute bottom-[180px] left-1/2 -translate-x-1/2 flex gap-2" role="tablist" aria-label="Navegación de imágenes">
           {Array.from({ length: totalItems }).map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentIndex(index)}
+              role="tab"
+              aria-selected={currentIndex === index}
+              aria-label={`Ir a imagen ${index + 1}`}
               className={`w-2 h-2 rounded-full transition-all ${
                 currentIndex === index ? 'bg-white w-6' : 'bg-white/50'
               }`}
@@ -217,28 +243,29 @@ function ProductModal({ product, onClose, onAddToCart }) {
 
 function ProductCard({ product, onAddToCart, onOpenModal }) {
   return (
-    <div className="masonry-item group cursor-pointer" onClick={() => onOpenModal(product)}>
+    <article className="masonry-item group cursor-pointer" onClick={() => onOpenModal(product)} role="listitem" aria-label={`${product.name} - ${product.price}`}>
       <img
         src={product.image}
-        alt={product.name}
+        alt={`${product.name} - ${product.category}`}
         className="masonry-image"
         loading="lazy"
       />
-      <span className="masonry-badge">{product.category}</span>
+      <span className="masonry-badge" aria-label={`Categoría: ${product.category}`}>{product.category}</span>
 
       <div className="masonry-overlay">
         <span className="masonry-category">{product.category}</span>
         <h3 className="masonry-title">{product.name}</h3>
-        <span className="masonry-price">{product.price}</span>
+        <span className="masonry-price" aria-label={`Precio: ${product.price}`}>{product.price}</span>
         <div className="flex gap-2 mt-3">
           <button
             onClick={(e) => {
               e.stopPropagation();
               onOpenModal(product);
             }}
+            aria-label={`Ver detalles de ${product.name}`}
             className="px-4 py-2 bg-white/20 hover:bg-white/30 text-white text-sm font-semibold rounded transition-colors flex items-center gap-2 backdrop-blur-sm"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
               <circle cx="12" cy="12" r="3"/>
             </svg>
@@ -249,9 +276,10 @@ function ProductCard({ product, onAddToCart, onOpenModal }) {
               e.stopPropagation();
               onAddToCart(product);
             }}
+            aria-label={`Agregar ${product.name} al carrito`}
             className="px-4 py-2 bg-[#DC3545] hover:bg-[#A02128] text-white text-sm font-semibold rounded transition-colors flex items-center gap-2"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/>
               <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/>
             </svg>
@@ -259,7 +287,7 @@ function ProductCard({ product, onAddToCart, onOpenModal }) {
           </button>
         </div>
       </div>
-    </div>
+    </article>
   );
 }
 
@@ -334,12 +362,18 @@ export default function Tienda() {
 
   return (
     <>
+      <SEO
+        title="Tienda - Productos Tecnológicos"
+        description="Tienda de productos tecnológicos de Ingecotol Ltda. Smartwatches, audífonos, wearables y más. Calidad garantizada con envíos a toda Colombia."
+        keywords="tienda tecnología, smartwatch, audífonos, wearables, Ingecotol, Colombia"
+        canonical="https://ingecotol.com/tienda"
+      />
       <div className="min-h-screen bg-white">
         {/* Header fijo con branding */}
-        <header className="sticky top-0 z-50 bg-[#0A2342] text-white shadow-lg">
+        <header className="sticky top-0 z-50 bg-[#0A2342] text-white shadow-lg" role="banner">
           <div className="container mx-auto px-5 flex items-center justify-between">
-            <Link to="/app" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <Link to="/app" className="flex items-center gap-2 hover:opacity-80 transition-opacity" aria-label="Volver a la página principal">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="m12 19-7-7 7-7"/>
                 <path d="M19 12H5"/>
               </svg>
@@ -347,60 +381,68 @@ export default function Tienda() {
             </Link>
             <img
               src="/images/Logo ingecotol.png"
-              alt="Ingecotol"
+              alt="Ingecotol Ltda - Tienda de tecnología"
               className="h-14 md:h-35 w-auto object-contain"
             />
             <CartIcon />
           </div>
         </header>
 
-        {/* Filtros de categoría */}
-        <section className="bg-[#E8EEF2] py-6 sticky top-[56px] z-40 shadow-sm">
-          <div className="container mx-auto px-5">
-            <div className="flex flex-wrap gap-3 justify-center">
-              {categories.map((category) => (
-                <button
-                  key={category}
-                  onClick={() => setSelectedCategory(category)}
-                  className={`category-filter px-6 py-2 font-semibold transition-all duration-300 border-2 ${
-                    selectedCategory === category
-                      ? 'bg-[#DC3545] text-white border-[#DC3545]'
-                      : 'bg-white text-[#0A2342] border-[#CBD5E0] hover:border-[#4A90E2]'
-                  }`}
-                >
-                  {category}
-                </button>
-              ))}
-            </div>
-          </div>
-        </section>
+        <main role="main">
+          <h1 className="sr-only">Tienda de Productos Tecnológicos - Ingecotol Ltda</h1>
 
-        {/* Grid de productos - Masonry Layout */}
-        <section className="py-12 bg-white overflow-hidden">
-          <div className="container mx-auto">
-            <div id="products-grid" ref={gridRef} className="masonry-grid">
-              {filteredProducts.map((product) => (
-                <ProductCard
-                  key={product.id}
-                  product={product}
-                  onAddToCart={addToCart}
-                  onOpenModal={setSelectedProduct}
-                />
-              ))}
-            </div>
-
-            {filteredProducts.length === 0 && (
-              <div className="text-center py-20">
-                <p className="text-2xl text-[#4A5568] font-family-lato">
-                  No hay productos en esta categoría
-                </p>
+          {/* Filtros de categoría */}
+          <nav className="bg-[#E8EEF2] py-6 sticky top-[56px] z-40 shadow-sm" aria-label="Filtros de categoría">
+            <div className="container mx-auto px-5">
+              <div className="flex flex-wrap gap-3 justify-center" role="group" aria-label="Categorías de productos">
+                {categories.map((category) => (
+                  <button
+                    key={category}
+                    onClick={() => setSelectedCategory(category)}
+                    aria-pressed={selectedCategory === category}
+                    className={`category-filter px-6 py-2 font-semibold transition-all duration-300 border-2 ${
+                      selectedCategory === category
+                        ? 'bg-[#DC3545] text-white border-[#DC3545]'
+                        : 'bg-white text-[#0A2342] border-[#CBD5E0] hover:border-[#4A90E2]'
+                    }`}
+                  >
+                    {category}
+                  </button>
+                ))}
               </div>
-            )}
-          </div>
-        </section>
+            </div>
+          </nav>
+
+          {/* Grid de productos - Masonry Layout */}
+          <section className="py-12 bg-white overflow-hidden" aria-labelledby="products-heading">
+            <h2 id="products-heading" className="sr-only">
+              {selectedCategory === "Todos" ? "Todos los productos" : `Productos de ${selectedCategory}`}
+            </h2>
+            <div className="container mx-auto">
+              <div id="products-grid" ref={gridRef} className="masonry-grid" role="list" aria-label="Lista de productos">
+                {filteredProducts.map((product) => (
+                  <ProductCard
+                    key={product.id}
+                    product={product}
+                    onAddToCart={addToCart}
+                    onOpenModal={setSelectedProduct}
+                  />
+                ))}
+              </div>
+
+              {filteredProducts.length === 0 && (
+                <div className="text-center py-20" role="status">
+                  <p className="text-2xl text-[#4A5568] font-family-lato">
+                    No hay productos en esta categoría
+                  </p>
+                </div>
+              )}
+            </div>
+          </section>
+        </main>
 
         {/* Footer */}
-        <footer className="bg-[#0A2342] text-white py-8 mt-12">
+        <footer className="bg-[#0A2342] text-white py-8 mt-12" role="contentinfo">
           <div className="container mx-auto px-5 text-center">
             <p className="text-sm">
               &copy; 2025 Ingecotol ltda. Todos los derechos reservados.

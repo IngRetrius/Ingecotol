@@ -1,0 +1,21 @@
+# Robots.txt para Ingecotol Ltda
+# https://ingecotol.com
+
+User-agent: *
+Allow: /
+
+# Permitir todas las páginas principales
+Allow: /
+Allow: /app
+Allow: /tienda
+
+# Bloquear archivos de desarrollo
+Disallow: /src/
+Disallow: /.git/
+Disallow: /node_modules/
+
+# Sitemap
+Sitemap: https://ingecotol.com/sitemap.xml
+
+# Crawl-delay para ser amigable con el servidor
+Crawl-delay: 1

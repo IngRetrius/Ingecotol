@@ -1,5 +1,6 @@
 import Header from "./Header";
 import BallCursor from "../common/BallCursor";
+import SEO from "../common/SEO";
 import { useRef } from "react";
 import Home from "../../sections/Home";
 import About from "../../sections/About";
@@ -26,11 +27,22 @@ export default function Layout() {
 
   return (
     <>
+      <SEO
+        title="Ingecotol Ltda | Ingeniería Civil y Telecomunicaciones en Colombia"
+        description="Ingecotol Ltda - Empresa líder en ingeniería civil y telecomunicaciones en Colombia. Más de 15 años de experiencia ofreciendo soluciones integrales en desarrollo web, CCTV, redes y mantenimiento de equipos."
+        keywords="ingeniería civil, telecomunicaciones, CCTV, redes, cableado estructurado, desarrollo web, mantenimiento equipos, Colombia, Ingecotol"
+        canonical="https://ingecotol.com/app"
+      />
       <ReactLenis root options={{ autoRaf: false }} ref={lenisRef} />
       <div className="font-family-lato min-h-dvh min-w-dvw flex flex-col overflow-x-hidden">
+        {/* Skip link para accesibilidad */}
+        <a href="#main-content" className="skip-link">
+          Saltar al contenido principal
+        </a>
+
         <Header />
 
-        <main className="flex-grow pt-16 md:pt-20">
+        <main id="main-content" className="flex-grow pt-16 md:pt-20" role="main">
           <Home />
           <About />
           <Services />
