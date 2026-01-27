@@ -84,7 +84,7 @@ export default function Portfolio() {
   return (
     <section id="portfolio-section" className="min-h-screen px-5 py-16 md:px-10 lg:px-14 flex flex-col justify-center bg-white">
       {/* Título principal */}
-      <h2 id="portfolio-title" className="text-7xl md:text-9xl font-family-oswald line-through mb-8 text-[#0A2342] text-center">
+      <h2 id="portfolio-title" className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-family-oswald line-through mb-8 text-[#0A2342] text-center">
         Ingecotol FC
       </h2>
 
@@ -103,7 +103,7 @@ export default function Portfolio() {
           <img
             src="/images/Logo Ingecotol FC 2d.png"
             alt="Ingecotol FC"
-            className="w-80 h-80 md:w-96 md:h-96 lg:w-[28rem] lg:h-[28rem] object-contain"
+            className="w-64 h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 xl:w-96 xl:h-96 2xl:w-[28rem] 2xl:h-[28rem] object-contain"
           />
         </div>
 
@@ -164,7 +164,7 @@ export default function Portfolio() {
 
         {/* Columna derecha - Promoción */}
         <div id="promo-section" className="flex flex-col justify-center text-center lg:text-left px-4">
-          <p className="text-4xl md:text-5xl lg:text-6xl font-family-oswald font-bold text-[#0A2342] leading-tight mb-6">
+          <p className="text-3xl md:text-4xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-family-oswald font-bold text-[#0A2342] leading-tight mb-6">
             <span className="text-[#DC3545]">10%</span> de descuento
           </p>
           <p className="text-xl md:text-2xl text-[#4A5568] leading-relaxed">

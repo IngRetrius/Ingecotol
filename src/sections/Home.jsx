@@ -38,10 +38,10 @@ export default function Home() {
       <h1 id="main-heading" className="sr-only">Ingecotol Ltda - Ingeniería Civil y Telecomunicaciones en Colombia</h1>
       <div className="px-5 grid grid-cols-1 lg:grid-cols-2 grid-rows-3 lg:grid-rows-2 lg:gap-x-20">
         <div className="font-family-oswald col-start-1 row-start-1 flex justify-center lg:justify-start items-end select-none">
-          <span id="first-title" aria-hidden="true" className="text-8xl lg:text-[13rem] whitespace-nowrap tracking-wide leading-none text-[#0A2342]">Ingecotol</span>
+          <span id="first-title" aria-hidden="true" className="text-6xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-[13rem] tracking-wide leading-none text-[#0A2342]">Ingecotol</span>
         </div>
         <div className="font-family-lato lg:col-start-2 lg:row-start-1 flex justify-center lg:justify-start items-start lg:items-end">
-          <div className="flex flex-col justify-center w-md">
+          <div className="flex flex-col justify-center w-full max-w-sm lg:max-w-md">
             <div id="top-bar" className="h-4 mb-5" style={{background: 'linear-gradient(90deg, #0A2342 0%, #2f5597 100%)'}}></div>
             <a id="body-text" className="font-family-lato text-center text-md cursor-crosshair text-[#4A5568]" href="#services-section">
               <SlideButton secondContent="Conoce nuestros servicios" style={{ borderBottom: "0" }} content="Ingeniería y telecomunicaciones. Experiencia, calidad y variedad a su servicio. Ofrecemos soluciones integrales para sus proyectos técnicos y de infraestructura." />
@@ -50,7 +50,7 @@ export default function Home() {
           </div>
         </div>
         <div className="mt-5 font-family-oswald lg:col-span-2 col-start-1 row-start-2 flex justify-center lg:justify-start items-start select-none text-center lg:text-left">
-          <span id="second-title" aria-hidden="true" className="text-7xl lg:text-[11rem] lg:whitespace-nowrap line-through tracking-wide leading-none pb-5 md:pb-0 text-[#2f5597]">construyendo futuro</span>
+          <span id="second-title" aria-hidden="true" className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-[11rem] line-through tracking-wide leading-none pb-5 md:pb-0 text-[#2f5597]">construyendo futuro</span>
         </div>
       </div>
     </section>

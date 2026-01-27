@@ -37,7 +37,7 @@ export default function About() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-7xl mx-auto mb-20" role="list" aria-label="Estadísticas de la empresa">
         {/* Instituciones educativas */}
         <article className="stat-item text-center p-6 md:p-10" role="listitem">
-          <div className="font-family-oswald text-[8rem] md:text-[12rem] lg:text-[14rem] font-bold text-[#DC3545] leading-none tracking-tight" aria-hidden="true">
+          <div className="font-family-oswald text-7xl md:text-8xl lg:text-9xl xl:text-[10rem] 2xl:text-[14rem] font-bold text-[#DC3545] leading-none tracking-tight whitespace-nowrap" aria-hidden="true">
             +20
           </div>
           <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-[#0A2342] mt-2">
@@ -50,7 +50,7 @@ export default function About() {
 
         {/* Años de experiencia */}
         <article className="stat-item text-center p-6 md:p-10" role="listitem">
-          <div className="font-family-oswald text-[8rem] md:text-[12rem] lg:text-[14rem] font-bold text-[#2f5597] leading-none tracking-tight" aria-hidden="true">
+          <div className="font-family-oswald text-7xl md:text-8xl lg:text-9xl xl:text-[10rem] 2xl:text-[14rem] font-bold text-[#2f5597] leading-none tracking-tight whitespace-nowrap" aria-hidden="true">
             15
           </div>
           <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-[#0A2342] mt-2">
@@ -63,7 +63,7 @@ export default function About() {
 
         {/* Clientes satisfechos */}
         <article className="stat-item text-center p-6 md:p-10" role="listitem">
-          <div className="font-family-oswald text-[8rem] md:text-[12rem] lg:text-[14rem] font-bold text-[#DC3545] leading-none tracking-tight" aria-hidden="true">
+          <div className="font-family-oswald text-7xl md:text-8xl lg:text-9xl xl:text-[10rem] 2xl:text-[14rem] font-bold text-[#DC3545] leading-none tracking-tight whitespace-nowrap" aria-hidden="true">
             +300
           </div>
           <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-[#0A2342] mt-2">

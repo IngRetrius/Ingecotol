@@ -73,7 +73,7 @@ export default function ProductShowcase() {
   return (
     <section
       id="product-showcase-section"
-      className="min-h-dvh py-20 px-5 md:px-10 lg:px-14 flex flex-col justify-center bg-[#E8EEF2]"
+      className="py-16 lg:py-20 px-5 md:px-10 lg:px-14 flex flex-col justify-center bg-[#E8EEF2]"
       aria-labelledby="showcase-heading"
       aria-roledescription="carrusel de productos destacados"
     >
@@ -88,17 +88,17 @@ export default function ProductShowcase() {
       </div>
 
       {/* Grid principal */}
-      <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 items-center">
+      <div className="max-w-[90rem] mx-auto w-full grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-16 xl:gap-20 items-center">
         {/* Columna izquierda - Título */}
         <div id="showcase-title" className="text-center lg:text-left">
-          <span className="text-sm font-semibold text-[#DC3545] uppercase tracking-wider">
+          <span className="text-sm lg:text-base xl:text-lg font-semibold text-[#DC3545] uppercase tracking-wider">
             Nuestra Tienda
           </span>
-          <h3 className="text-5xl md:text-6xl lg:text-7xl font-family-oswald text-[#0A2342] mt-2 leading-tight">
+          <h3 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-family-oswald text-[#0A2342] mt-2 leading-tight">
             Productos{" "}
             <span className="text-[#2f5597] line-through">Destacados</span>
           </h3>
-          <p className="text-lg text-[#4A5568] mt-4 max-w-md mx-auto lg:mx-0">
+          <p className="text-lg lg:text-xl xl:text-2xl text-[#4A5568] mt-4 max-w-md lg:max-w-lg mx-auto lg:mx-0">
             Tecnología de calidad seleccionada para ti
           </p>
         </div>
@@ -106,7 +106,7 @@ export default function ProductShowcase() {
         {/* Columna central - Carrusel */}
         <div
           id="product-carousel"
-          className="relative"
+          className="relative lg:scale-110 xl:scale-115 2xl:scale-120 origin-center"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
           onFocus={() => setIsPaused(true)}
@@ -134,14 +134,14 @@ export default function ProductShowcase() {
             </div>
 
             {/* Info del producto */}
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#0A2342] to-transparent p-6 pt-16">
-              <span className="text-[#DC3545] text-sm font-semibold uppercase tracking-wider">
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#0A2342] to-transparent p-4 pt-12">
+              <span className="text-[#DC3545] text-xs font-semibold uppercase tracking-wider">
                 {currentProduct.category}
               </span>
-              <h4 className="text-white text-2xl font-family-oswald font-bold mt-1">
+              <h4 className="text-white text-lg font-family-oswald font-bold mt-0.5">
                 {currentProduct.name}
               </h4>
-              <span className="text-[#4A90E2] text-xl font-bold">
+              <span className="text-[#4A90E2] text-base font-bold">
                 {currentProduct.price}
               </span>
             </div>
@@ -150,12 +150,11 @@ export default function ProductShowcase() {
             <button
               onClick={prevSlide}
               aria-label="Producto anterior"
-              className="absolute left-4 top-1/2 -translate-y-1/2 bg-[#0A2342]/80 hover:bg-[#0A2342] text-white p-3 rounded-full transition-all hover:scale-110"
+              className="absolute left-3 top-1/2 -translate-y-1/2 bg-[#0A2342]/80 hover:bg-[#0A2342] text-white p-2 rounded-full transition-all hover:scale-110"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
+                className="w-4 h-4"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -170,12 +169,11 @@ export default function ProductShowcase() {
             <button
               onClick={nextSlide}
               aria-label="Siguiente producto"
-              className="absolute right-4 top-1/2 -translate-y-1/2 bg-[#0A2342]/80 hover:bg-[#0A2342] text-white p-3 rounded-full transition-all hover:scale-110"
+              className="absolute right-3 top-1/2 -translate-y-1/2 bg-[#0A2342]/80 hover:bg-[#0A2342] text-white p-2 rounded-full transition-all hover:scale-110"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
+                className="w-4 h-4"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -191,7 +189,7 @@ export default function ProductShowcase() {
 
           {/* Indicadores (dots) */}
           <div
-            className="flex justify-center gap-2 mt-4"
+            className="flex justify-center gap-2 lg:gap-3 mt-4 lg:mt-6"
             role="tablist"
             aria-label="Navegación de productos"
           >
@@ -202,10 +200,10 @@ export default function ProductShowcase() {
                 aria-selected={currentSlide === index}
                 aria-label={`Ir al producto ${index + 1}: ${product.name}`}
                 onClick={() => setCurrentSlide(index)}
-                className={`h-3 rounded-full transition-all duration-300 ${
+                className={`h-3 lg:h-4 rounded-full transition-all duration-300 ${
                   index === currentSlide
-                    ? "bg-[#DC3545] w-8"
-                    : "bg-[#CBD5E0] hover:bg-[#4A90E2] w-3"
+                    ? "bg-[#DC3545] w-8 lg:w-10"
+                    : "bg-[#CBD5E0] hover:bg-[#4A90E2] w-3 lg:w-4"
                 }`}
               />
             ))}
@@ -214,7 +212,7 @@ export default function ProductShowcase() {
 
         {/* Columna derecha - CTA */}
         <div id="showcase-cta" className="text-center lg:text-left">
-          <p className="text-lg text-[#4A5568] mb-6 max-w-xs mx-auto lg:mx-0">
+          <p className="text-lg lg:text-xl xl:text-2xl text-[#4A5568] mb-6 lg:mb-8 max-w-xs lg:max-w-sm mx-auto lg:mx-0">
             Descubre nuestra selección de{" "}
             <span className="text-[#0A2342] font-semibold">
               tecnología de calidad
@@ -223,7 +221,7 @@ export default function ProductShowcase() {
           </p>
           <Link
             to="/tienda"
-            className="group inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#DC3545] hover:bg-[#A02128] text-white font-semibold rounded-lg transition-all duration-300 text-lg shadow-lg hover:shadow-xl hover:scale-105"
+            className="group inline-flex items-center justify-center gap-3 px-8 py-4 lg:px-10 lg:py-5 bg-[#DC3545] hover:bg-[#A02128] text-white font-semibold rounded-lg transition-all duration-300 text-lg lg:text-xl shadow-lg hover:shadow-xl hover:scale-105"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -235,7 +233,7 @@ export default function ProductShowcase() {
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
-              className="transition-transform group-hover:scale-110"
+              className="transition-transform group-hover:scale-110 lg:w-7 lg:h-7"
               aria-hidden="true"
             >
               <circle cx="8" cy="21" r="1" />
@@ -244,7 +242,7 @@ export default function ProductShowcase() {
             </svg>
             Explorar Tienda
           </Link>
-          <p className="text-sm text-[#4A90E2] mt-4">Envíos a toda Colombia</p>
+          <p className="text-sm lg:text-base text-[#4A90E2] mt-4 lg:mt-6">Envíos a toda Colombia</p>
         </div>
       </div>
     </section>
