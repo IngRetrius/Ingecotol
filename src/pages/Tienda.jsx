@@ -12,6 +12,24 @@ import { products } from "../data/products";
 // Componente Modal con Carrusel
 function ProductModal({ product, onClose, onAddToCart }) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [selectedVariant, setSelectedVariant] = useState(
+    product.hasVariants ? product.variants[0] : null
+  );
+
+  // Estados para productos con color + empaque
+  const [selectedColor, setSelectedColor] = useState(
+    product.hasColorAndPackaging ? product.colors[0] : null
+  );
+  const [selectedPackaging, setSelectedPackaging] = useState(() => {
+    if (product.hasColorAndPackaging && product.colors[0]) {
+      // Seleccionar automáticamente la primera opción disponible
+      const availableOptions = product.availability[product.colors[0].label] || [];
+      const firstAvailable = product.packagingOptions.find(p => availableOptions.includes(p.label));
+      return firstAvailable || null;
+    }
+    return null;
+  });
+
   const modalRef = useRef(null);
 
   // Total de items: imágenes + video (si existe)
@@ -158,15 +176,158 @@ function ProductModal({ product, onClose, onAddToCart }) {
               <span className="text-sm text-[#4A90E2] font-semibold">{product.category}</span>
               <h2 id="modal-product-title" className="text-2xl font-bold text-[#0A2342] mt-1">{product.name}</h2>
             </div>
-            <span className="text-2xl font-bold text-[#DC3545]" aria-label={`Precio: ${product.price}`}>{product.price}</span>
+            <span className="text-2xl font-bold text-[#DC3545]" aria-label={`Precio: ${
+              product.hasColorAndPackaging
+                ? (selectedPackaging?.price || product.price)
+                : (selectedVariant ? selectedVariant.price : product.price)
+            }`}>
+              {product.hasColorAndPackaging
+                ? (selectedPackaging?.price || product.price)
+                : (selectedVariant ? selectedVariant.price : product.price)}
+            </span>
           </div>
+
+          {/* Selector de variantes simples (longitud, etc.) */}
+          {product.hasVariants && product.variants && (
+            <div className="mt-4">
+              <label className="block text-sm font-semibold text-[#0A2342] mb-2">
+                {product.variantLabel === "color"
+                  ? "Selecciona el color:"
+                  : product.variantLabel === "opcion"
+                    ? "Selecciona una opción:"
+                    : product.variantLabel === "referencia"
+                      ? "Selecciona la referencia:"
+                      : "Selecciona la longitud:"}
+              </label>
+              <div className="flex flex-wrap gap-2">
+                {product.variants.map((variant, index) => (
+                  <button
+                    key={index}
+                    onClick={() => {
+                      setSelectedVariant(variant);
+                      // Si la variante tiene imagen, mostrarla en el carrusel
+                      if (variant.image && product.images) {
+                        const imgIndex = product.images.indexOf(variant.image);
+                        if (imgIndex !== -1) setCurrentIndex(imgIndex);
+                      }
+                    }}
+                    className={`px-4 py-2 rounded-lg border-2 font-medium transition-all ${
+                      selectedVariant?.label === variant.label
+                        ? 'border-[#DC3545] bg-[#DC3545] text-white'
+                        : 'border-[#CBD5E0] bg-white text-[#0A2342] hover:border-[#4A90E2]'
+                    }`}
+                  >
+                    {variant.label}
+                    {/* Solo mostrar precio si es diferente entre variantes */}
+                    {product.variants.some(v => v.price !== product.variants[0].price) && (
+                      <span className="block text-xs mt-0.5 opacity-80">{variant.price}</span>
+                    )}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Selector de color + empaque (para tarjetero MagSafe, etc.) */}
+          {product.hasColorAndPackaging && (
+            <div className="mt-4 space-y-4">
+              {/* Selector de color */}
+              <div>
+                <label className="block text-sm font-semibold text-[#0A2342] mb-2">
+                  Selecciona el color:
+                </label>
+                <div className="flex flex-wrap gap-2">
+                  {product.colors.map((color, index) => (
+                    <button
+                      key={index}
+                      onClick={() => {
+                        setSelectedColor(color);
+                        // Mostrar imagen del color en el carrusel
+                        if (color.image && product.images) {
+                          const imgIndex = product.images.indexOf(color.image);
+                          if (imgIndex !== -1) setCurrentIndex(imgIndex);
+                        }
+                        // Verificar si el empaque actual está disponible para el nuevo color
+                        const availableOptions = product.availability[color.label] || [];
+                        if (selectedPackaging && !availableOptions.includes(selectedPackaging.label)) {
+                          // Seleccionar la primera opción disponible
+                          const firstAvailable = product.packagingOptions.find(p => availableOptions.includes(p.label));
+                          setSelectedPackaging(firstAvailable || null);
+                        }
+                      }}
+                      className={`px-4 py-2 rounded-lg border-2 font-medium transition-all ${
+                        selectedColor?.label === color.label
+                          ? 'border-[#DC3545] bg-[#DC3545] text-white'
+                          : 'border-[#CBD5E0] bg-white text-[#0A2342] hover:border-[#4A90E2]'
+                      }`}
+                    >
+                      {color.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Selector de empaque */}
+              <div>
+                <label className="block text-sm font-semibold text-[#0A2342] mb-2">
+                  Selecciona el empaque:
+                </label>
+                <div className="flex flex-wrap gap-2">
+                  {product.packagingOptions.map((packaging, index) => {
+                    const availableOptions = selectedColor ? (product.availability[selectedColor.label] || []) : [];
+                    const isAvailable = availableOptions.includes(packaging.label);
+
+                    return (
+                      <button
+                        key={index}
+                        onClick={() => isAvailable && setSelectedPackaging(packaging)}
+                        disabled={!isAvailable}
+                        className={`px-4 py-2 rounded-lg border-2 font-medium transition-all ${
+                          !isAvailable
+                            ? 'border-[#CBD5E0] bg-gray-100 text-gray-400 cursor-not-allowed'
+                            : selectedPackaging?.label === packaging.label
+                              ? 'border-[#DC3545] bg-[#DC3545] text-white'
+                              : 'border-[#CBD5E0] bg-white text-[#0A2342] hover:border-[#4A90E2]'
+                        }`}
+                      >
+                        {packaging.label}
+                        <span className="block text-xs mt-0.5 opacity-80">
+                          {isAvailable ? packaging.price : 'No disponible'}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          )}
+
           <button
             onClick={() => {
-              onAddToCart(product);
+              if (product.hasColorAndPackaging) {
+                // Crear variante combinada de color + empaque
+                const combinedVariant = {
+                  label: `${selectedColor.label} - ${selectedPackaging.label}`,
+                  price: selectedPackaging.price,
+                  image: selectedColor.image,
+                };
+                onAddToCart(product, combinedVariant);
+              } else {
+                onAddToCart(product, selectedVariant);
+              }
               onClose();
             }}
-            aria-label={`Agregar ${product.name} al carrito por ${product.price}`}
-            className="mt-6 w-full px-6 py-3 bg-[#DC3545] hover:bg-[#A02128] text-white font-semibold rounded-lg transition-colors flex items-center justify-center gap-2"
+            disabled={product.hasColorAndPackaging && (!selectedColor || !selectedPackaging)}
+            aria-label={`Agregar ${product.name} al carrito por ${
+              product.hasColorAndPackaging
+                ? (selectedPackaging?.price || product.price)
+                : (selectedVariant ? selectedVariant.price : product.price)
+            }`}
+            className={`mt-6 w-full px-6 py-3 text-white font-semibold rounded-lg transition-colors flex items-center justify-center gap-2 ${
+              product.hasColorAndPackaging && (!selectedColor || !selectedPackaging)
+                ? 'bg-gray-400 cursor-not-allowed'
+                : 'bg-[#DC3545] hover:bg-[#A02128]'
+            }`}
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/>
@@ -210,7 +371,9 @@ function ProductCard({ product, onAddToCart, onOpenModal }) {
       <div className="masonry-overlay">
         <span className="masonry-category">{product.category}</span>
         <h3 className="masonry-title">{product.name}</h3>
-        <span className="masonry-price" aria-label={`Precio: ${product.price}`}>{product.price}</span>
+        <span className="masonry-price" aria-label={`Precio: ${(product.hasVariants || product.hasColorAndPackaging) ? 'Desde ' : ''}${product.price}`}>
+          {(product.hasVariants || product.hasColorAndPackaging) ? `Desde ${product.price}` : product.price}
+        </span>
         <div className="flex gap-2 mt-3">
           <button
             onClick={(e) => {
@@ -229,16 +392,21 @@ function ProductCard({ product, onAddToCart, onOpenModal }) {
           <button
             onClick={(e) => {
               e.stopPropagation();
-              onAddToCart(product);
+              // Si tiene variantes o color+empaque, abrir modal para seleccionar
+              if (product.hasVariants || product.hasColorAndPackaging) {
+                onOpenModal(product);
+              } else {
+                onAddToCart(product);
+              }
             }}
-            aria-label={`Agregar ${product.name} al carrito`}
+            aria-label={(product.hasVariants || product.hasColorAndPackaging) ? `Ver opciones de ${product.name}` : `Agregar ${product.name} al carrito`}
             className="px-4 py-2 bg-[#DC3545] hover:bg-[#A02128] text-white text-sm font-semibold rounded transition-colors flex items-center gap-2"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/>
               <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/>
             </svg>
-            Agregar
+            {(product.hasVariants || product.hasColorAndPackaging) ? "Ver opciones" : "Agregar"}
           </button>
         </div>
       </div>
@@ -271,7 +439,7 @@ export default function Tienda() {
     };
   }, [selectedProduct]);
 
-  const categories = ["Todos", "Wearables", "Audio"];
+  const categories = ["Todos", "Wearables", "Audio", "Cables", "Accesorios", "Impresión"];
 
   const filteredProducts = selectedCategory === "Todos"
     ? products

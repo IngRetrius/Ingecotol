@@ -111,10 +111,11 @@ export default function Cart() {
 
   // Manejar decremento de cantidad (con animación si llega a 0)
   const handleDecrement = useCallback((item, index) => {
+    const itemKey = item.cartId || item.id;
     if (item.quantity <= 1) {
-      handleRemoveItem(item.id, index);
+      handleRemoveItem(itemKey, index);
     } else {
-      updateQuantity(item.id, item.quantity - 1);
+      updateQuantity(itemKey, item.quantity - 1);
     }
   }, [handleRemoveItem, updateQuantity]);
 
@@ -166,63 +167,67 @@ export default function Cart() {
             </div>
           ) : (
             <div className="space-y-4">
-              {cart.items.map((item, index) => (
-                <div
-                  key={item.id}
-                  ref={el => itemsRef.current[index] = el}
-                  className="flex gap-3 bg-white/5 rounded-lg p-3 transition-colors hover:bg-white/10"
-                >
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className="w-20 h-20 object-cover rounded"
-                  />
-                  <div className="flex-1 min-w-0">
-                    <h3 className="text-white text-sm font-medium truncate">{item.name}</h3>
-                    <p className="text-[#4A90E2] text-sm">{item.price}</p>
-                    <p className="text-white/40 text-xs">{item.category}</p>
-
-                    {/* Controles de cantidad */}
-                    <div className="flex items-center gap-2 mt-2">
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleDecrement(item, index);
-                        }}
-                        className="w-6 h-6 flex items-center justify-center bg-white/10 text-white rounded hover:bg-white/20 transition-colors"
-                        aria-label="Reducir cantidad"
-                      >
-                        -
-                      </button>
-                      <span className="text-white text-sm w-6 text-center" aria-label={`Cantidad: ${item.quantity}`}>
-                        {item.quantity}
-                      </span>
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          updateQuantity(item.id, item.quantity + 1);
-                        }}
-                        className="w-6 h-6 flex items-center justify-center bg-white/10 text-white rounded hover:bg-white/20 transition-colors"
-                        aria-label="Aumentar cantidad"
-                      >
-                        +
-                      </button>
-                    </div>
-                  </div>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleRemoveItem(item.id, index);
-                    }}
-                    className="text-white/40 hover:text-[#DC3545] p-1 transition-colors"
-                    aria-label={`Eliminar ${item.name} del carrito`}
+              {cart.items.map((item, index) => {
+                const itemKey = item.cartId || item.id;
+                const itemName = item.displayName || item.name;
+                return (
+                  <div
+                    key={itemKey}
+                    ref={el => itemsRef.current[index] = el}
+                    className="flex gap-3 bg-white/5 rounded-lg p-3 transition-colors hover:bg-white/10"
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                      <path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
-                    </svg>
-                  </button>
-                </div>
-              ))}
+                    <img
+                      src={item.image}
+                      alt={itemName}
+                      className="w-20 h-20 object-cover rounded"
+                    />
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-white text-sm font-medium truncate">{itemName}</h3>
+                      <p className="text-[#4A90E2] text-sm">{item.price}</p>
+                      <p className="text-white/40 text-xs">{item.category}</p>
+
+                      {/* Controles de cantidad */}
+                      <div className="flex items-center gap-2 mt-2">
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleDecrement(item, index);
+                          }}
+                          className="w-6 h-6 flex items-center justify-center bg-white/10 text-white rounded hover:bg-white/20 transition-colors"
+                          aria-label="Reducir cantidad"
+                        >
+                          -
+                        </button>
+                        <span className="text-white text-sm w-6 text-center" aria-label={`Cantidad: ${item.quantity}`}>
+                          {item.quantity}
+                        </span>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            updateQuantity(itemKey, item.quantity + 1);
+                          }}
+                          className="w-6 h-6 flex items-center justify-center bg-white/10 text-white rounded hover:bg-white/20 transition-colors"
+                          aria-label="Aumentar cantidad"
+                        >
+                          +
+                        </button>
+                      </div>
+                    </div>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleRemoveItem(itemKey, index);
+                      }}
+                      className="text-white/40 hover:text-[#DC3545] p-1 transition-colors"
+                      aria-label={`Eliminar ${itemName} del carrito`}
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
+                      </svg>
+                    </button>
+                  </div>
+                );
+              })}
             </div>
           )}
         </div>

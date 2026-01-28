@@ -40,9 +40,23 @@ export function CartProvider({ children }) {
   };
 
   // Añadir producto al carrito
-  const addToCart = (product) => {
+  // Soporta productos con variantes (ej: Cable HDMI con diferentes longitudes)
+  const addToCart = (product, selectedVariant = null) => {
     setCart(prevCart => {
-      const existingIndex = prevCart.items.findIndex(item => item.id === product.id);
+      // Generar ID único para el carrito (incluye variante si existe)
+      const cartId = selectedVariant
+        ? `${product.id}-${selectedVariant.label}`
+        : product.id;
+
+      // Determinar el precio (de la variante o del producto)
+      const itemPrice = selectedVariant ? selectedVariant.price : product.price;
+
+      // Nombre para mostrar (incluye variante si existe)
+      const displayName = selectedVariant
+        ? `${product.name} - ${selectedVariant.label}`
+        : product.name;
+
+      const existingIndex = prevCart.items.findIndex(item => item.cartId === cartId);
 
       let newItems;
       if (existingIndex > -1) {
@@ -52,7 +66,14 @@ export function CartProvider({ children }) {
             : item
         );
       } else {
-        newItems = [...prevCart.items, { ...product, quantity: 1 }];
+        newItems = [...prevCart.items, {
+          ...product,
+          cartId,
+          price: itemPrice,
+          displayName,
+          selectedVariant,
+          quantity: 1
+        }];
       }
 
       return {
@@ -61,14 +82,17 @@ export function CartProvider({ children }) {
       };
     });
 
-    showNotification(`${product.name} añadido al carrito`, 'success');
+    const notificationName = selectedVariant
+      ? `${product.name} (${selectedVariant.label})`
+      : product.name;
+    showNotification(`${notificationName} añadido al carrito`, 'success');
     setIsCartOpen(true);
   };
 
-  // Eliminar producto del carrito
-  const removeFromCart = (itemId) => {
+  // Eliminar producto del carrito (usa cartId para soportar variantes)
+  const removeFromCart = (cartId) => {
     setCart(prevCart => {
-      const newItems = prevCart.items.filter(item => item.id !== itemId);
+      const newItems = prevCart.items.filter(item => (item.cartId || item.id) !== cartId);
       return {
         items: newItems,
         total: calculateTotal(newItems)
@@ -76,16 +100,16 @@ export function CartProvider({ children }) {
     });
   };
 
-  // Actualizar cantidad
-  const updateQuantity = (itemId, newQuantity) => {
+  // Actualizar cantidad (usa cartId para soportar variantes)
+  const updateQuantity = (cartId, newQuantity) => {
     if (newQuantity <= 0) {
-      removeFromCart(itemId);
+      removeFromCart(cartId);
       return;
     }
 
     setCart(prevCart => {
       const newItems = prevCart.items.map(item =>
-        item.id === itemId ? { ...item, quantity: newQuantity } : item
+        (item.cartId || item.id) === cartId ? { ...item, quantity: newQuantity } : item
       );
       return {
         items: newItems,
@@ -117,7 +141,9 @@ export function CartProvider({ children }) {
     let message = '¡Hola! Me interesa realizar el siguiente pedido:\n\n';
 
     cart.items.forEach((item, index) => {
-      message += `${index + 1}. ${item.name}\n`;
+      // Usar displayName si existe (incluye variante), sino usar name
+      const itemName = item.displayName || item.name;
+      message += `${index + 1}. ${itemName}\n`;
       message += `   Cantidad: ${item.quantity}\n`;
       message += `   Precio: ${item.price}\n\n`;
     });
