@@ -100,7 +100,7 @@ function Intro() {
   return (
     <>
       <SEO
-        title="Ingecotol Ltda | Ingeniería Civil y Telecomunicaciones en Colombia"
+        title="Ingecotol Ltda."
         description="Bienvenido a Ingecotol Ltda. Empresa líder en ingeniería civil y telecomunicaciones en Colombia. Experiencia, calidad y variedad a su servicio."
         keywords="Ingecotol, ingeniería civil, telecomunicaciones, Colombia, empresa tecnología"
         canonical="https://ingecotol.com/"
