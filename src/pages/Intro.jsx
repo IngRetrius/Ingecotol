@@ -101,14 +101,14 @@ function Intro() {
     <>
       <SEO
         title="Ingecotol Ltda."
-        description="Bienvenido a Ingecotol Ltda. Empresa líder en ingeniería civil y telecomunicaciones en Colombia. Experiencia, calidad y variedad a su servicio."
-        keywords="Ingecotol, ingeniería civil, telecomunicaciones, Colombia, empresa tecnología"
+        description="Bienvenido a Ingecotol Ltda. Empresa líder en telecomunicaciones en Colombia. Experiencia, calidad y variedad a su servicio."
+        keywords="Ingecotol, telecomunicaciones, Colombia, empresa tecnología"
         canonical="https://ingecotol.com/"
       />
       <section className="grid place-items-center min-h-screen" role="banner">
       <div className="relative flex flex-col items-center gap-8 max-w-md md:max-w-xl px-5">
         <div ref={containerTitleRef} className="flex flex-row items-end relative gap-2 md:gap-3">
-          <h1 className="sr-only">Ingecotol Ltda - Ingeniería Civil y Telecomunicaciones</h1>
+          <h1 className="sr-only">Ingecotol Ltda - Ingeniería y Telecomunicaciones</h1>
           <span id="intro-title" aria-hidden="true" className="font-family-oswald text-6xl md:text-8xl select-none whitespace-nowrap text-[#0A2342]">Ingecotol</span>
           <span id="intro-title-studio" aria-hidden="true" className="font-family-oswald text-6xl md:text-8xl select-none text-[#2f5597]">ltda</span>
         </div>

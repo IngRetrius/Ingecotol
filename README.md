@@ -1,6 +1,6 @@
 # Ingecotol ltda - Website
 
-Sitio web corporativo para Ingecotol ltda, empresa de ingenieria civil y telecomunicaciones.
+Sitio web corporativo para Ingecotol ltda, empresa de telecomunicaciones.
 
 ## Tech Stack
 

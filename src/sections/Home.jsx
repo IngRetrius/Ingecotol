@@ -35,7 +35,7 @@ export default function Home() {
 
   return (
     <section id="home-section" className="h-dvh grid place-content-center" aria-labelledby="main-heading">
-      <h1 id="main-heading" className="sr-only">Ingecotol Ltda - Ingeniería Civil y Telecomunicaciones en Colombia</h1>
+      <h1 id="main-heading" className="sr-only">Ingecotol Ltda - Ingeniería y Telecomunicaciones en Colombia</h1>
       <div className="px-5 grid grid-cols-1 lg:grid-cols-2 grid-rows-3 lg:grid-rows-2 lg:gap-x-20">
         <div className="font-family-oswald col-start-1 row-start-1 flex justify-center lg:justify-start items-end select-none">
           <span id="first-title" aria-hidden="true" className="text-6xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-[13rem] tracking-wide leading-none text-[#0A2342]">Ingecotol</span>

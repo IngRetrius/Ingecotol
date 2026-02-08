@@ -304,12 +304,12 @@ useEffect(() => {
 
 ```html
 <!-- Agregar a index.html -->
-<meta name="description" content="Ingecotol Ltda - Empresa de ingeniería civil y telecomunicaciones. Experiencia, calidad y variedad a su servicio en Colombia.">
-<meta name="keywords" content="ingeniería civil, telecomunicaciones, Colombia, construcción">
+<meta name="description" content="Ingecotol Ltda - Empresa de telecomunicaciones. Experiencia, calidad y variedad a su servicio en Colombia.">
+<meta name="keywords" content="telecomunicaciones, Colombia, infraestructura">
 
 <!-- Open Graph -->
 <meta property="og:title" content="Ingecotol Ltda">
-<meta property="og:description" content="Empresa de ingeniería civil y telecomunicaciones">
+<meta property="og:description" content="Empresa de telecomunicaciones">
 <meta property="og:image" content="/images/og-image.jpg">
 <meta property="og:url" content="https://ingecotol.com">
 <meta property="og:type" content="website">
@@ -327,7 +327,7 @@ useEffect(() => {
   "@context": "https://schema.org",
   "@type": "Organization",
   "name": "Ingecotol Ltda",
-  "description": "Empresa de ingeniería civil y telecomunicaciones",
+  "description": "Empresa de telecomunicaciones",
   "url": "https://ingecotol.com",
   "telephone": "+573106564709",
   "address": {

@@ -10,7 +10,7 @@ import { useEffect } from 'react';
  */
 export default function SEO({
   title = 'Ingecotol Ltda',
-  description = 'Empresa líder en ingeniería civil y telecomunicaciones en Colombia.',
+  description = 'Empresa líder en telecomunicaciones en Colombia.',
   keywords = '',
   canonical = '',
   ogImage = '/images/og-image.jpg'
@@ -66,7 +66,7 @@ export default function SEO({
 
     // Cleanup: restaurar valores por defecto al desmontar
     return () => {
-      document.title = 'Ingecotol Ltda | Ingeniería Civil y Telecomunicaciones en Colombia';
+      document.title = 'Ingecotol Ltda | Telecomunicaciones en Colombia';
     };
   }, [title, description, keywords, canonical, ogImage]);
 

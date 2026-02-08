@@ -4,7 +4,7 @@ This file provides guidance to Claude Code when working with code in this reposi
 
 ## Project Overview
 
-**Ingecotol ltda** is a professional corporate website for a civil engineering and telecommunications company. Built with React 19 + Vite 7, featuring a sophisticated animation system with GSAP and smooth scrolling with Lenis.
+**Ingecotol ltda** is a professional corporate website for a telecommunications company. Built with React 19 + Vite 7, featuring a sophisticated animation system with GSAP and smooth scrolling with Lenis.
 
 **Tech Stack:**
 - React 19.1.1 with React Router 7.8.2

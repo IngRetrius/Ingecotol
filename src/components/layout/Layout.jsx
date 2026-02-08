@@ -29,9 +29,9 @@ export default function Layout() {
   return (
     <>
       <SEO
-        title="Ingecotol Ltda | Ingeniería Civil y Telecomunicaciones en Colombia"
-        description="Ingecotol Ltda - Empresa líder en ingeniería civil y telecomunicaciones en Colombia. Más de 15 años de experiencia ofreciendo soluciones integrales en desarrollo web, CCTV, redes y mantenimiento de equipos."
-        keywords="ingeniería civil, telecomunicaciones, CCTV, redes, cableado estructurado, desarrollo web, mantenimiento equipos, Colombia, Ingecotol"
+        title="Ingecotol Ltda | Telecomunicaciones en Colombia"
+        description="Ingecotol Ltda - Empresa líder en telecomunicaciones en Colombia. Más de 15 años de experiencia ofreciendo soluciones integrales en desarrollo web, CCTV, redes y mantenimiento de equipos."
+        keywords="telecomunicaciones, CCTV, redes, cableado estructurado, desarrollo web, mantenimiento equipos, Colombia, Ingecotol"
         canonical="https://ingecotol.com/app"
       />
       <ReactLenis root options={{ autoRaf: false }} ref={lenisRef} />
